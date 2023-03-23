@@ -1,0 +1,48 @@
+<%- include ('../../partials/header') %>
+<%- include ('../../partials/admin-navbar') %>
+
+<div class="container">
+    <hr>
+    <h2>Projetos</h2>
+    <a href="/admin/projects/new"> <button class="btn-success">Criar novo Projeto</button></a>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Slug</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% projects.forEach(project => { %>
+                <tr>
+                    <td><%= project.id %></td>
+                    <td><%= project.title %></td>
+                    <td><%= project.slug %></td>
+                    <td><%= project.category.title %></td>
+                    <td>
+                        <form method="POST" action="/projects/delete" style="display: inline" onsubmit="confirmarDelecao(event, this)">
+                            <input type="hidden" name="id" value="<%= project.id %>">
+                            <button class="btn-danger">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
+
+<%- include ('../../partials/admin-footer') %>
+
+<script>
+    function confirmarDelecao(event, form) {
+        event.preventDefault();
+        let decision = confirm("Vocẽ quer deletar este projeto?");
+        if(decision) {
+            form.submit();
+        }
+    }
+</script>
