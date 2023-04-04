@@ -3,21 +3,21 @@
 
 <div class="container">
     <hr>
-    <h2>Usuários</h2>
-    <a href="/admin/users/create"> <button class="btn-success">Criar novo usuário</button></a>
+    <h2>Arquitetos</h2>
+    <a href="/admin/architects/new"> <button class="btn-success">Cadastrar novo arquiteto</button></a>
     <hr>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>E-mail</th>
+                <th>Nome</th>
             </tr>
         </thead>
         <tbody>
-            <% users.forEach(user => { %>
+            <% architects.forEach(architect => { %>
                 <tr>
-                    <td><%= user.id %></td>
-                    <td><%= user.email %></td>
+                    <td><%= architect.id %></td>
+                    <td><%= architect.name %></td>
                 </tr>
             <% }) %>
         </tbody>

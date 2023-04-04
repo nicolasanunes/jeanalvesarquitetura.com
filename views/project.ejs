@@ -1,19 +1,17 @@
 <%- include ('partials/header') %>
 <%- include ('partials/navbar') %>
 
-<body>
-    <div class="container">
+<div class="container">
 
-        <hr>
-        <div class="card">
-            <div class="card-header">
-                <h2><%= project.title %></h2>
-            </div>
-             <div class="card-body">
-                <%- project.body %>
-            </div>
+    <hr>
+    <div class="card">
+        <div class="card-header">
+            <h2><%= project.title %></h2>
+        </div>
+            <div class="card-body">
+            <%- project.body %>
         </div>
     </div>
-</body>
+</div>
 
 <%- include ('partials/footer') %>

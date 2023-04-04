@@ -9,7 +9,7 @@ router.get("/admin/categories/new", adminAuth, (req, res) => {
 });
 
 router.post("/categories/save", adminAuth, (req, res) => {
-    var title = req.body.title; // nome do campo que a informação será coletada no arquivo "new.ejs"
+    let title = req.body.title; // nome do campo que a informação será coletada no arquivo "new.ejs"
     if(title != undefined) {
         Category.create({
             title: title,

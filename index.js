@@ -8,10 +8,12 @@ const connection = require("./database/database");
 const categoriesController = require("./categories/CategoriesController");
 const projectsController = require("./projects/ProjectsController");
 const usersController = require("./users/UsersController");
+const architectsController = require("./architects/ArchitectsController");
 
 const Project = require("./projects/Project");
 const Category = require("./categories/Category");
 const User = require("./users/User");
+const Architect = require("./architects/Architect");
 
 // static
 // app.use('/static', express.static('public'));
@@ -42,12 +44,24 @@ connection
 app.use("/", categoriesController);
 app.use("/", projectsController);
 app.use("/", usersController);
+app.use("/", architectsController);
 
 app.get('/', (req, res) => {
     res.render("index");
 });
 
 // rotas
+app.get('/about', (req, res) => {
+    Architect.findAll({
+        order: [
+            ['id', 'DESC' ]
+        ],
+        limit: 5
+    }).then(architects => {
+        res.render("about", {architects: architects});
+    });
+});
+
 app.get('/projects', (req, res) => {
     Project.findAll({
         order: [

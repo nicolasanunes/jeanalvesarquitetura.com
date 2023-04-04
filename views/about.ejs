@@ -1,0 +1,20 @@
+<%- include ('partials/header') %>
+<%- include ('partials/navbar') %>
+
+<% architects.forEach(architect => { %>
+
+<div class="architect-image" style="border: 1px solid black; width: 400px; height: 600px">
+    <img src="static/uploads/<%= architect.image %>" alt="Foto do Arquiteto" style="width: 400px; height: 600px;" >
+</div>
+
+<div class="architect-name">
+    <%= architect.name %>
+</div>
+
+<div class="architect-description">
+    <%= architect.description %>
+</div>
+
+<% }); %>
+
+<%- include ('partials/footer') %>

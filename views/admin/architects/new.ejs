@@ -1,0 +1,41 @@
+<%- include ('../../partials/header') %>
+<%- include ('../../partials/admin-navbar') %>
+
+<div class="container">
+    <hr>
+    <div class="card">
+        <div class="card-header">
+            <h2>Foto do Arquiteto</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data" action="/architects/create">
+                <div class="div-image-preview">
+                    <label for="image" >
+                        <img id="file-preview" alt="Preview da Imagem" src="/static/img/image-preview.jpg" class="image-preview">   
+                    </label>
+                </div><br>
+                <input type="file" id="image" name="image" onchange="document.getElementById('file-preview').src = window.URL.createObjectURL(this.files[0])">
+        </div>
+    </div>
+    <hr>
+    <div class="card mt-4">
+        <div class="card-header">
+            Criação de Arquiteto
+        </div>
+        <div class="card-body">
+            <form action="/architects/create" method="POST">
+                <input class="form-control" name="name" type="text" placeholder="Nome do Arquiteto">
+                <input class="form-control" name="description" type="text" placeholder="Descrição do Projeto">
+                <input class="form-control" name="address" type="text" placeholder="Endereço">
+                <input class="form-control" name="phoneNumber" type="text" placeholder="Número de telefone">
+                <input class="form-control" name="instagramLink" type="text" placeholder="Link do Instagram">
+                <input class="form-control" name="facebookLink" type="text" placeholder="Link do Facebook">
+                <input class="form-control" name="twitterLink" type="text" placeholder="Link do Twitter">
+                <input class="form-control" name="whatsappLink" type="text" placeholder="Link do Whatsapp">
+                <button type="submit" class="btn-success btn-block">Criar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include ('../../partials/admin-footer') %>

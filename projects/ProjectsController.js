@@ -14,15 +14,17 @@ router.get("/admin/projects", adminAuth, (req, res) => {
     });
 });
 
+/*
+router.post("/upload", uploadImage.single("image"), (req, res) => {
+    image = req.file.filename;
+    console.log("Upload realizado.");
+});
+*/
+
 router.get("/admin/projects/new", adminAuth, (req, res) => {
     Category.findAll().then(categories => {
         res.render("admin/projects/new", {categories: categories});
     });
-});
-
-router.post("/upload", uploadImage.single("image"), (req, res) => {
-    image = req.file.filename;
-    console.log("Upload realizado.");
 });
 
 router.post("/projects/save", uploadImage.single("cape-image"), adminAuth, (req, res) => {
