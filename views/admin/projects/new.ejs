@@ -5,26 +5,43 @@
     <hr>
     <div class="card">
         <div class="card-header">
-            <h2>Novo Projeto</h2>
+            <h2>Imagem Capa do Projeto</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="/projects/save">
+            <form method="POST" enctype="multipart/form-data" action="/projects/save">
+                <div class="div-image-preview">
+                    <label for="cape-image" >
+                        <img id="file-preview" alt="Preview da Imagem" src="/static/img/image-preview.jpg" class="image-preview">   
+                    </label>
+                </div><br>
+                <input type="file" id="cape-image" name="cape-image" onchange="document.getElementById('file-preview').src = window.URL.createObjectURL(this.files[0])">
+        </div>
+    </div>
+    <hr>
+    <div class="card">
+        <div class="card-header">
+            <h2>Descrição do Projeto</h2>
+        </div>
+        <div class="card-body">
                 <input class="form-control" type="text" name="title" placeholder="Defina o título do Projeto"><br>
-                <textarea class="form-control" name="body" id="project" placeholder="Descreva o projeto aqui" cols="30" rows="10"></textarea><br>
-                <label">Categoria</label>
+                <textarea class="form-control" name="body" id="project" placeholder="Descreva o projeto aqui" cols="30" rows="10"></textarea>
+                <hr>
+                <label>Categoria</label>
                 <select name="category" class="form-control">
                     <% categories.forEach((category) => { %>
                         <option value="<%= category.id %>"><%= category.title %></option>
                     <% }); %>
-                </select><br>
-                <button class="btn btn-success">Cadastrar</button>
-            </form>
+                </select>
+                <br>
+                <button class="btn btn-success" type="submit">Cadastrar</button>
+            </form>            
         </div>
     </div>
 </div>
 
 <%- include ('../../partials/admin-footer') %>
 
+<!-- TINYMCE -->
 <script src="/static/tinymce/tinymce.min.js"></script>
 <script>
     tinymce.init({
@@ -33,3 +50,17 @@
         plugins: 'advlist autolink link image lists preview searchreplace wordcount fullscreen insertdatetime media save table emoticons'
     });
 </script>
+
+<!-- stop refresh after submit on image form -->
+<!--
+<script>
+    var form = document.getElementById("imageForm");
+    function submitForm(event) {
+       event.preventDefault();
+       form.style.display = "none";
+    }
+    form.addEventListener('submit', submitForm);
+</script>
+-->
+
+

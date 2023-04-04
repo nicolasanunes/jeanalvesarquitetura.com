@@ -24,6 +24,7 @@
                     <td><%= project.slug %></td>
                     <td><%= project.category.title %></td>
                     <td>
+                        <a href="/admin/projects/edit/<%= project.id %>"><button class="btn-warning">Editar</button></a>
                         <form method="POST" action="/projects/delete" style="display: inline" onsubmit="confirmarDelecao(event, this)">
                             <input type="hidden" name="id" value="<%= project.id %>">
                             <button class="btn-danger">Deletar</button>

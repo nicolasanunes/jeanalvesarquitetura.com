@@ -210,3 +210,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+/**
+ * Preview Upload Image
+ */
+/*
+function previewBeforeUpload() {  
+    if(e.target.files.lenght == 0) {
+      return;
+    }
+    let file = e.target.files[0];
+    let url = URL.createObjectURL(file);
+    //document.querySelector("#file"+"-preview div").innerText = file.name;
+    //document.querySelector("#"+id+"-preview img").src = url;
+    let imagem = document.getElementById("file-preview");
+    imagem.setAttribute('src', `${url}`);
+}
+*/

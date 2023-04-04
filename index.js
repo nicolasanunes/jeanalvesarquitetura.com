@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 
 // sessions
 app.use(session({
-    secret: "klasdksdfdflasdgvbjasdkdjdhfbbf", cookie: { maxAge: 3000000 }
+    secret: "klasdksdfdflasdgvbjasdkdjdhfbbf", cookie: { maxAge: 3000000000 }
 }));
 
 // database
@@ -47,6 +47,7 @@ app.get('/', (req, res) => {
     res.render("index");
 });
 
+// rotas
 app.get('/projects', (req, res) => {
     Project.findAll({
         order: [

@@ -32,11 +32,11 @@
 
               <div class="col-lg-4 col-md-6 portfolio-item filter-<%= project.categoryId %>">
                 <div class="portfolio-content h-100">
-                  <img src="static/img/projects/remodeling-1.jpg" class="img-fluid" alt="">
+                  <img src="static/uploads/<%= project.capeImage %>" class="img-fluid" alt="">
                   <div class="portfolio-info">
                     <h4><%= project.title %></h4>
                     <p>Lorem ipsum, dolor sit amet consectetur</p>
-                    <a href="static/img/projects/remodeling-1.jpg" title="<%= project.title %>" data-gallery="portfolio-gallery-remodeling" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="static/uploads/<%= project.capeImage %>" title="<%= project.title %>" data-gallery="portfolio-gallery-remodeling" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                     <a href="/<%= project.slug %>" title="Ver Projeto" class="details-link"><i class="bi bi-link-45deg"></i></a>
                   </div>
                 </div>

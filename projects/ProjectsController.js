@@ -4,6 +4,7 @@ const Category = require("../categories/Category");
 const Project = require("./Project");
 const slugify = require("slugify");
 const adminAuth = require("../middlewares/adminAuth");
+const uploadImage = require("../middlewares/uploadImage");
 
 router.get("/admin/projects", adminAuth, (req, res) => {
     Project.findAll({
@@ -19,7 +20,13 @@ router.get("/admin/projects/new", adminAuth, (req, res) => {
     });
 });
 
-router.post("/projects/save", adminAuth, (req, res) => {
+router.post("/upload", uploadImage.single("image"), (req, res) => {
+    image = req.file.filename;
+    console.log("Upload realizado.");
+});
+
+router.post("/projects/save", uploadImage.single("cape-image"), adminAuth, (req, res) => {
+    let capeImage = req.file.filename;
     let title = req.body.title;
     let body = req.body.body;
     let category = req.body.category;
@@ -27,7 +34,8 @@ router.post("/projects/save", adminAuth, (req, res) => {
         title: title,
         slug: slugify(title),
         body: body,
-        categoryId: category
+        categoryId: category,
+        capeImage: capeImage
     }).then(() => {
         res.redirect("/admin/projects");
     });

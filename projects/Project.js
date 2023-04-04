@@ -12,12 +12,15 @@ const Project = connection.define('projects', {
     }, body: {
         type: Sequelize.TEXT,
         allowNull: false
+    }, capeImage: {
+        type: Sequelize.STRING,
+        allowNull: true
     }
 });
 
 Category.hasMany(Project); // 1 categoria tem muitos projetos (Relacionamento 1 para muitos no Sequelize)
 Project.belongsTo(Category); // 1 projeto pertence a 1 categoria (Relacionamento 1 para 1 no Sequelize)
 
-// Project.sync({force: true}); // força a criação da tabela no banco de dados no primeiro contato
+// Project.sync({force: true}); // força a criação da tabela no banco de dados no primeiro contato e apaga todas as informações atuais
 
 module.exports = Project;
