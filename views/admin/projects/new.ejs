@@ -2,41 +2,56 @@
 <%- include ('../../partials/admin-navbar') %>
 
 <div class="container">
-    <hr>
-    <div class="card">
-        <div class="card-header">
-            <h2>Imagem Capa do Projeto</h2>
-        </div>
-        <div class="card-body">
-            <form method="POST" enctype="multipart/form-data" action="/projects/save">
-                <div class="div-image-preview">
-                    <label for="cape-image" >
-                        <img id="file-preview" alt="Preview da Imagem" src="/static/img/image-preview.jpg" class="image-preview">   
+    <br>
+    <form method="POST" action="/projects/save" id="description-form" enctype="multipart/form-data">    
+        <div class="card">
+            <div class="card-header">
+                <h2>Cadastrar um Novo Projeto</h2>
+            </div>
+            <div class="card-body">
+                <label for="title"><strong>Título:</strong></label>
+                <input class="form-control" type="text" name="title" id="title" placeholder="Casa Moss"><br>
+                <label for="location"><strong>Local:</strong></label>
+                <input class="form-control" type="text" name="location" id="location" placeholder="Uberlândia/MG"><br>
+                <label for="year"><strong>Ano:</strong></label>
+                <input class="form-control" type="text" name="year" id="year" placeholder="2023"><br>
+                <label for="area"><strong>Área:</strong></label>
+                <input class="form-control" type="text" name="area" id="area" placeholder="240m²"><br>
+                
+                
+               
+                <label for="cape-image"><strong>Imagem principal:</strong></label><br>
+                <div class="image-preview-div">
+                    <label for="cape-image">   
+                        <img class="image-preview" alt="Preview da Imagem" src="/static/img/image-preview.png" id="cape-image-preview">   
                     </label>
-                </div><br>
-                <input type="file" id="cape-image" name="cape-image" onchange="document.getElementById('file-preview').src = window.URL.createObjectURL(this.files[0])">
-        </div>
-    </div>
-    <hr>
-    <div class="card">
-        <div class="card-header">
-            <h2>Descrição do Projeto</h2>
-        </div>
-        <div class="card-body">
-                <input class="form-control" type="text" name="title" placeholder="Defina o título do Projeto"><br>
-                <textarea class="form-control" name="body" id="project" placeholder="Descreva o projeto aqui" cols="30" rows="10"></textarea>
-                <hr>
-                <label>Categoria</label>
-                <select name="category" class="form-control">
-                    <% categories.forEach((category) => { %>
-                        <option value="<%= category.id %>"><%= category.title %></option>
-                    <% }); %>
-                </select>
+                </div>
+                <div class="resolutions-div">
+                    <img class="" alt="Resoluções 16:9" src="/static/img/note.png" id="resolutions">
+                </div>
                 <br>
-                <button class="btn btn-success" type="submit">Cadastrar</button>
-            </form>            
+                <input type="file" accept="image/*" id="cape-image" name="project-images" onchange="document.getElementById('cape-image-preview').src = window.URL.createObjectURL(this.files[0])"><br><br>
+            
+                
+                
+                <label for="cape-image"><strong>Imagens secundárias:</strong></label><br>
+                <div class="image-preview-div">
+                    <label for="secondary-images">
+                        <img class="image-preview" alt="Preview da Imagem" src="/static/img/image-preview.png" id="secondary-image-preview">   
+                    </label>
+                </div>
+                <br>
+                <input multiple="multiple" type="file" accept="image/*" id="secondary-images" name="project-images" onchange="document.getElementById('secondary-image-preview').src = window.URL.createObjectURL(this.files[0]);"><br><br>
+            
+                
+                
+                <label for="description"><strong>Descrição:</strong></label>
+                <textarea class="form-control" name="description" id="description" placeholder="Descrição do projeto" cols="30" rows="10"></textarea>
+            </div>
+            <input class="btn btn-success" type="submit" value="Cadastrar" style="border-radius: 0px 0px 5px 5px;">
         </div>
-    </div>
+        <br>
+    </form>
 </div>
 
 <%- include ('../../partials/admin-footer') %>
@@ -46,21 +61,25 @@
 <script>
     tinymce.init({
         language: 'pt_BR',
-        selector: "#project",
-        plugins: 'advlist autolink link image lists preview searchreplace wordcount fullscreen insertdatetime media save table emoticons'
+        selector: "#description",
     });
 </script>
 
-<!-- stop refresh after submit on image form -->
+<!-- Multiple Upload -->
 <!--
 <script>
-    var form = document.getElementById("imageForm");
-    function submitForm(event) {
-       event.preventDefault();
-       form.style.display = "none";
+    description-form.addEventListener('submit', async function (e) {
+    const files = e.target.secondary-images.files;
+    if (files.length != 0) {
+        for (const single_file of files) {
+            data.append('secondary-images', single_file);
+        }
     }
-    form.addEventListener('submit', submitForm);
-</script>
+});
+
+const submit_data_fetch = await fetch('/projects/save', {
+    method: 'POST',
+    body: data
+});
 -->
-
-
+</script>

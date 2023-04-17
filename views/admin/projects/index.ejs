@@ -4,7 +4,7 @@
 <div class="container">
     <hr>
     <h2>Projetos</h2>
-    <a href="/admin/projects/new"> <button class="btn-success">Criar novo Projeto</button></a>
+    <a href="/admin/projects/new"> <button class="btn btn-success">Criar novo Projeto</button></a>
     <hr>
     <table class="table table-bordered">
         <thead>
@@ -12,7 +12,6 @@
                 <th>ID</th>
                 <th>Título</th>
                 <th>Slug</th>
-                <th>Categoria</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -22,7 +21,6 @@
                     <td><%= project.id %></td>
                     <td><%= project.title %></td>
                     <td><%= project.slug %></td>
-                    <td><%= project.category.title %></td>
                     <td>
                         <a href="/admin/projects/edit/<%= project.id %>"><button class="btn-warning">Editar</button></a>
                         <form method="POST" action="/projects/delete" style="display: inline" onsubmit="confirmarDelecao(event, this)">

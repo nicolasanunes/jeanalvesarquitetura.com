@@ -9,6 +9,19 @@ const storage = multer.diskStorage({
         }
 });
 
-const uploadImage = multer({storage: storage});
+const uploadImage = multer({
+    storage: storage,
+    limits: { fileSize: 1 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            const err = new Error('São permitidas apenas imagens .png, .jpg e .jpeg!')
+            err.name = 'ExtensionError'
+            return cb(err);
+        }
+    },
+});
 
 module.exports = uploadImage;

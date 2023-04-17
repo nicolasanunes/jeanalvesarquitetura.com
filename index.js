@@ -5,15 +5,16 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const connection = require("./database/database");
 
-const categoriesController = require("./categories/CategoriesController");
 const projectsController = require("./projects/ProjectsController");
 const usersController = require("./users/UsersController");
 const architectsController = require("./architects/ArchitectsController");
 
 const Project = require("./projects/Project");
-const Category = require("./categories/Category");
 const User = require("./users/User");
 const Architect = require("./architects/Architect");
+
+// favicon
+app.use("/favicon.ico", express.static("public/img/favicon/favicon.ico"));
 
 // static
 // app.use('/static', express.static('public'));
@@ -41,7 +42,6 @@ connection
     });
 
 // use
-app.use("/", categoriesController);
 app.use("/", projectsController);
 app.use("/", usersController);
 app.use("/", architectsController);
