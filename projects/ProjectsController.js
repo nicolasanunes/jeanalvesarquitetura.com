@@ -7,6 +7,8 @@ const adminAuth = require("../middlewares/adminAuth");
 const uploadImage = require("../middlewares/uploadImage");
 const fs = require("fs");
 const { Sequelize, col } = require("sequelize");
+const connection = require("../database/database");
+const SecondaryImage = require("./SecondaryImages");
 
 router.get("/admin/projects", adminAuth, (req, res) => {
     Project.findAll()
@@ -57,37 +59,42 @@ router.post("/projects/save", uploadImage.array("project-images", 30), adminAuth
 
 router.post("/projects/delete", adminAuth, (req, res) => {
     let id = req.body.id;
+    let titleImagesArray = [];
     if(id != undefined) {
-        const projectImagesArray = SecondaryImages.findAll({
+        SecondaryImage.findAll({
             where: {
                 projectId: id
             }
+        }).then(secondaryImages => {
+            ({secondaryImages: secondaryImages});
+            secondaryImages.forEach((secondaryImage) => {
+                titleImagesArray.push(secondaryImage.title);
+            });
+            titleImagesArray.push(SecondaryImages.title);
+            console.log(`TITLE IMAGES ARRAY EHHHHHHHHHHHH: ${titleImagesArray}`);
+            for(i = 0; i < titleImagesArray.length-1; i++) {
+                fs.unlink(`./public/uploads/${titleImagesArray[i]}`, (err) => {
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        console.log("Imagem apagada")
+                    }
+                });
+            }
         }).then(() => {
-            const imagesArray = projectImagesArray;
-            console.log(`A ID EHHHHH: ${id}`)
-            console.log(`O array das imagens eh o seguinteeeeeeeeee: ${projectImagesArray}`);
-            console.log(`O array das imagens eh o seguinteeeeeeeeee: ${imagesArray}`);
-            res.redirect("/admin/projects");
-        });
-        /*
-        fs.unlink("./public/uploads/")
-        if(!isNaN(id)) { // se for um numero
+            SecondaryImage.destroy({
+                where: {
+                    projectId: id
+                }
+            });
             Project.destroy({
                 where: {
                     id: id
                 }
             })
-            SecondaryImages.destroy({
-                where: {
-                    projectId: id
-                }
-            }).then(() => {
-                res.redirect("/admin/projects");
-            });
-        } else { // se não for um numero
+        }).then(() => {
             res.redirect("/admin/projects");
-        }
-        */
+        });
     } else {
         res.redirect("admin/projects");
     }
