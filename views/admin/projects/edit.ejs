@@ -1,202 +1,102 @@
 <%- include ('../../partials/header') %>
 <%- include ('../../partials/admin-navbar') %>
-<link rel="stylesheet" href="/static/css/projectCss.css">
 
-  <main class="app">
-    
-    <div class="header">
-      <h2>Inserir Novas Imagens do Projeto</h2>
-      <div class="server-message"></div>
-    </div>
+<div class="container">
+    <br>
+    <form method="POST" action="/projects/update" id="description-form" enctype="multipart/form-data">    
+        <div class="card">
+            <div class="card-header">
+                <h2>Editar Projeto <%= project.title %></h2>
+            </div>
+            <div class="card-body">
+                <label for="title"><strong>Título:</strong></label>
+                <input class="form-control" type="text" name="title" id="title" value="<%- project.title %>"><br>
+                <label for="location"><strong>Local:</strong></label>
+                <input class="form-control" type="text" name="location" id="location" value="<%- project.location %>"><br>
+                <label for="year"><strong>Ano:</strong></label>
+                <input class="form-control" type="text" name="year" id="year" value="<%- project.year %>"><br>
+                <label for="area"><strong>Área:</strong></label>
+                <input class="form-control" type="text" name="area" id="area" value="<%- project.area %>"><br>
+                
+                
+               
+                <label for="cape-image"><strong>Imagem principal:</strong></label><br>
+                <div class="image-preview-div">
+                    <label for="cape-image">   
+                        <img class="image-preview" alt="Preview da Imagem" src="/static/uploads/<%= project.capeImage %>" id="cape-image-preview">   
+                    </label>
+                </div>
+                <div class="resolutions-div">
+                    <img class="" alt="Resoluções 16:9" src="/static/img/note.png" id="resolutions">
+                </div>
+                <br>
+                <input type="file" accept="image/*" id="cape-image" name="project-images" onchange="document.getElementById('cape-image-preview').src = window.URL.createObjectURL(this.files[0])"><br><br>
+            
+                
+                
+                <label for="cape-image"><strong>Excluir imagens secundárias:</strong></label><br>
 
-    <div class="input-div">
-      <p>Faça <span class="browse">Upload</span> das imagens do projeto aqui</p>
-      <input type="file" class="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg"/>
-    </div>
+                <% secondaryImage.forEach(secondaryImage => { %>
+                    <div class="secondary-image-div">
+                        <div class="image-preview-div">
+                            <div class="close-image-div">
+                                <img class="close-image" src="/static/img/close.png" alt="Imagem de Fechar">
+                            </div>
+                            <label for="secondary-images">
+                                <img class="image-preview" alt="Preview da Imagem" src="/static/uploads/<%= secondaryImage.title %>" id="secondary-image-preview">   
+                            </label>
+                        </div>
+                        <br>
+                    </div>
+                <% }); %>
 
-    <form id="saved-form">
-      <div class="header">
-        <h3>Imagens do Projeto</h3>
-        <button type="submit">Delete</button>
-      </div>
-      <div class="saved-div"></div>
+                <br><br>
+                <label for="cape-image"><strong>Adicionar imagens secundárias:</strong></label><br>
+                <div class="image-preview-div">
+                    <label for="secondary-images">
+                        <img class="image-preview" alt="Preview da Imagem" src="/static/img/image-preview.png" id="secondary-image-preview">   
+                    </label>
+                </div>
+                <br>
+                <input multiple="multiple" type="file" accept="image/*" id="secondary-images" name="project-images" onchange="document.getElementById('secondary-image-preview').src = window.URL.createObjectURL(this.files[0]);"><br><br>
+            
+                
+                <br><br>
+                <label for="description"><strong>Descrição:</strong></label>
+                <textarea class="form-control" name="description" id="description" cols="30" rows="10"><%- project.description %></textarea>
+            </div>
+            <input class="btn btn-success" type="submit" value="Cadastrar" style="border-radius: 0px 0px 5px 5px;">
+        </div>
+        <br>
     </form>
+</div>
 
-    <form id="queued-form">
-      <div class="header">
-        <h3>Queued in Frontend</h3>
-        <button type="submit">Upload</button>
-      </div>
-      <div class="queued-div"></div>
-    </form>
+<%- include ('../../partials/admin-footer') %>
 
-      <div class="header">
-          <h2>Editar Projeto</h2>
-      </div>
-
-      <form method="POST" action="/projects/update">
-          <input type="hidden" value="<% project.id %>" name="id">
-          <input class="form-control" type="text" name="title" value="<%- project.title %>"><br>
-          <textarea class="form-control" name="body" id="project" placeholder="Escreva o projeto aqui" cols="30" rows="10"><%- project.body %></textarea><br>
-          <label">Categoria</label>
-          <select name="category" class="form-control">
-              <% categories.forEach((category) => { %>
-                  <% if(category.id == project.categoryId) { %>
-                      <option value="<%= category.id %>" selected><%= category.title %></option>
-                  <% } else { %>
-                      <option value="<%= category.id %>"><%= category.title %></option>
-                  <% } %>
-              <% }); %>
-          </select><br>
-          <button class="btn btn-success">Atualizar</button>
-      </form>
-
-  </main>
-
-  <%- include ('../../partials/admin-footer') %>
-
-  <!-- TINYMCE -->
-  <script src="/static/tinymce/tinymce.min.js"></script>
-  <script>
-      tinymce.init({
-          language: 'pt_BR',
-          selector: "#project",
-          plugins: 'advlist autolink link image lists preview searchreplace wordcount fullscreen insertdatetime media save table emoticons'
-      });
-  </script>
-
-  <script>
-
-    let queuedImagesArray = [],
-    savedForm = document.querySelector("#saved-form"),
-    queuedForm = document.querySelector("#queued-form"),
-    savedDiv = document.querySelector('.saved-div'),
-    queuedDiv = document.querySelector('.queued-div'),
-    inputDiv = document.querySelector('.input-div'),
-    input = document.querySelector('.input-div input'),
-    serverMessage = document.querySelector('.server-message'),
-    savedImages = JSON.parse('<%-JSON.stringify(images)%>'),
-    deleteImages = [];
-
-    // SAVED IMAGES
-    if(savedImages) displaySavedImages()
-
-    function displaySavedImages(){
-      let images = "";
-        savedImages.forEach((image, index) => {
-          images += `<div class="image">
-                      <img src="http://localhost:3000/uploads/${image}" alt="image">
-                      <span onclick="deleteSavedImage(${index})">&times;</span>
-                    </div>`;
-        })
-      savedDiv.innerHTML = images;
-    }
-
-    function deleteSavedImage(index) {
-      deleteImages.push(savedImages[index])
-      savedImages.splice(index, 1);
-      displaySavedImages();
-    }
-
-    savedForm.addEventListener("submit", (e) => {
-      e.preventDefault()
-      deleteImagesFromServer()
+<!-- TINYMCE -->
+<script src="/static/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        language: 'pt_BR',
+        selector: "#description",
     });
+</script>
 
-    function deleteImagesFromServer() {
-
-      fetch("delete", {
-        method: "PUT",
-        headers: {
-          "Accept": "application/json, text/plain, */*",
-          "Content-type": "application/json"
-        },
-        body: JSON.stringify({deleteImages})
-      })
-
-      .then(response => {
-        if (response.status !== 200) throw Error(response.statusText)
-        deleteImages = []
-        serverMessage.innerHTML = response.statusText
-        serverMessage.style.cssText = "background-color: #d4edda; color:#1b5e20"
-      })
-
-      .catch(error => {
-        serverMessage.innerHTML = error
-        serverMessage.style.cssText = "background-color: #f8d7da; color:#b71c1c"
-      });
-
+<!-- Multiple Upload -->
+<!--
+<script>
+    description-form.addEventListener('submit', async function (e) {
+    const files = e.target.secondary-images.files;
+    if (files.length != 0) {
+        for (const single_file of files) {
+            data.append('secondary-images', single_file);
+        }
     }
+});
 
-    // QUEUED IMAGES
-
-    function displayQueuedImages() {
-      let images = "";
-      queuedImagesArray.forEach((image, index) => {
-        images += `<div class="image">
-                    <img src="${URL.createObjectURL(image)}" alt="image">
-                    <span onclick="deleteQueuedImage(${index})">&times;</span>
-                  </div>`;
-      })
-      queuedDiv.innerHTML = images;
-    }
-
-    function deleteQueuedImage(index) {
-      queuedImagesArray.splice(index, 1);
-      displayQueuedImages();
-    }
-
-    input.addEventListener("change", () => {
-      const files = input.files;
-      for (let i = 0; i < files.length; i++) {
-        queuedImagesArray.push(files[i])
-      }
-      queuedForm.reset();
-      displayQueuedImages()
-    })
-
-    inputDiv.addEventListener("drop", (e) => {
-      e.preventDefault()
-      const files = e.dataTransfer.files
-      for (let i = 0; i < files.length; i++) {
-        if (!files[i].type.match("image")) continue; // only photos
-        
-        if (queuedImagesArray.every(image => image.name !== files[i].name))
-          queuedImagesArray.push(files[i])
-      }
-      displayQueuedImages()
-    })
-
-    queuedForm.addEventListener("submit", (e) => {
-      e.preventDefault()
-      sendQueuedImagesToServer()
-    });
-
-    function sendQueuedImagesToServer() {
-      const formData = new FormData(queuedForm);
-
-      queuedImagesArray.forEach((image, index) => {
-        formData.append(`file[${index}]`, image)
-      })
-
-      fetch("upload", {
-        method: "POST",
-        body: formData
-      })
-        
-      .then(response => {
-        if(response.status !== 200) throw Error(response.statusText)
-        location.reload() 
-      })
-
-      .catch( error => { 
-        serverMessage.innerHTML = error
-        serverMessage.style.cssText = "background-color: #f8d7da; color:#b71c1c"
-      });
-
-    }
-
-  </script>
-  
-</body>
-</html>
+const submit_data_fetch = await fetch('/projects/save', {
+    method: 'POST',
+    body: data
+});
+-->
+</script>

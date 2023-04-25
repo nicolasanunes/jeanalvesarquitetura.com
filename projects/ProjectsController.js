@@ -101,6 +101,23 @@ router.post("/projects/delete", adminAuth, (req, res) => {
 });
 
 router.get("/admin/projects/edit/:id", adminAuth, (req, res) => {
+    let id = req.params.id;
+    if(id != undefined) {
+        Project.findByPk(id).then(project => {
+            SecondaryImage.findAll({
+                where: {
+                    projectId: id
+                }
+            }).then(secondaryImage => {
+                res.render("admin/projects/edit", {project: project, secondaryImage: secondaryImage});
+            })
+        });
+    } else {
+        res.redirect("/");
+    }
+
+
+    /*
     let images = [];
     fs.readdir("./public/uploads/", (err, files) => {
         if(!err){
@@ -112,18 +129,8 @@ router.get("/admin/projects/edit/:id", adminAuth, (req, res) => {
             console.log(err);
         }
     });
-    let id = req.params.id;
-    Project.findByPk(id).then(project => {
-        if(project != undefined) {
-            Category.findAll().then(categories => {
-                res.render("admin/projects/edit", {images: images, project: project, categories: categories});
-            });
-        } else {
-            res.redirect("/");
-        }
-    }).catch(err => {
-        res.redirect("/");
-    });
+    */
+   
 });
 
 router.post("/projects/update", adminAuth, (req, res) => {

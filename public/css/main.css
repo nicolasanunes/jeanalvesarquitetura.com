@@ -2701,16 +2701,45 @@ section {
 
 .image-preview-div {
   display: inline-block;
-  width: 320px;
-  height: 180px;
+  width: 312px;
+  height: 175px;
   border: 1px dotted #000;
   overflow: hidden;
   border-radius: 5px;
+  position: relative;
 }
 
 .image-preview {
   height: 100%;
   max-width: 100%;
+  position: relative;
+}
+
+.secondary-image-div {
+  display: inline-block;
+  position: relative;
+}
+
+.close-image-div {
+  margin-top: 4px;
+  margin-right: 4px;
+  width: 20px;
+  height: 20px;
+  float: right;
+  display: flex;
+  border-radius: 50px;
+}
+
+.close-image-div:hover {
+  border: 2px solid darkred;
+  cursor: pointer;
+}
+
+.close-image {
+  width: 99%;
+  height: 99%;
+  margin: auto;
+  display: block;
 }
 
 .resolutions-div {
