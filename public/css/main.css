@@ -2720,9 +2720,20 @@ section {
   position: relative;
 }
 
+.menu-close-div {
+  position: relative;
+  width: 100%;
+  background-color: #f7f7f7;
+  height: 25px;
+}
+
+.image-name {
+  font-size: small;
+}
+
 .close-image-div {
-  margin-top: 4px;
-  margin-right: 4px;
+  margin-top: 2px;
+  margin-right: 2px;
   width: 20px;
   height: 20px;
   float: right;
@@ -2731,7 +2742,6 @@ section {
 }
 
 .close-image-div:hover {
-  border: 2px solid darkred;
   cursor: pointer;
 }
 
@@ -2740,6 +2750,7 @@ section {
   height: 99%;
   margin: auto;
   display: block;
+  border-radius: 50px;
 }
 
 .resolutions-div {

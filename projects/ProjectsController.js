@@ -71,13 +71,12 @@ router.post("/projects/delete", adminAuth, (req, res) => {
                 titleImagesArray.push(secondaryImage.title);
             });
             titleImagesArray.push(SecondaryImages.title);
-            console.log(`TITLE IMAGES ARRAY EHHHHHHHHHHHH: ${titleImagesArray}`);
             for(i = 0; i < titleImagesArray.length-1; i++) {
                 fs.unlink(`./public/uploads/${titleImagesArray[i]}`, (err) => {
                     if(err) {
                         console.log(err);
                     } else {
-                        console.log("Imagem apagada")
+                        console.log("Imagem apagada");
                     }
                 });
             }
@@ -115,38 +114,76 @@ router.get("/admin/projects/edit/:id", adminAuth, (req, res) => {
     } else {
         res.redirect("/");
     }
-
-
-    /*
-    let images = [];
-    fs.readdir("./public/uploads/", (err, files) => {
-        if(!err){
-            files.forEach(file => {
-            images.push(file);
-            })
-            //res.render("admin/projects/edit", { images: images})
-        } else {
-            console.log(err);
-        }
-    });
-    */
-   
 });
 
-router.post("/projects/update", adminAuth, (req, res) => {
+router.post("/projects/update", uploadImage.array("project-images", 30), adminAuth, (req, res) => {
     let id = req.body.id;
     let title = req.body.title;
-    let body = req.body.body;
-    let category = req.body.category;
-    Project.update({title: title, body: body, categoryId: category, slug: slugify(title)},{
+    let location = req.body.location;
+    let year = req.body.year;
+    let area = req.body.area;
+    let description = req.body.description;
+    let projectImages = [];
+    req.files.forEach((file) => {
+        projectImages.push(file.filename);
+    });
+    let capeImage = projectImages[0];
+    let deletedImagesId = req.body.deletedImagesId;
+    let deletedImagesArray = deletedImagesId.split(",");
+    let titleImagesArray = [];
+    let idImagesArray = [];
+
+    SecondaryImage.findAll({
+        where: {
+            projectId: id
+        }
+    }).then(secondaryImages => {
+        ({secondaryImages: secondaryImages});
+        secondaryImages.forEach((secondaryImage) => {
+            idImagesArray.push(secondaryImage.id);
+            titleImagesArray.push(secondaryImage.title);
+        });
+
+        let n = 0;
+        for(i = 0; i < idImagesArray.length; i++) {
+            if(idImagesArray[i] == deletedImagesArray[n]) {
+                fs.unlink(`./public/uploads/${titleImagesArray[i]}`, (err) => {
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        console.log("Imagem apagada");
+                    }
+                });
+                    n = n + 1;
+                    console.log("RODOUI O IFFFFFFFFFFFFFFFFFFFF");
+            }
+        }
+    }).then(() => {
+        for(i = 0; i < deletedImagesArray.length ; i++) {
+            SecondaryImages.destroy({
+                where: {
+                    id: deletedImagesArray[i]
+                }
+            });
+        }
+    });
+    
+    Project.update({title: title, slug: slugify(title), capeImage: capeImage, location: location, year: year, area: area, description: description},{
         where: {
             id: id
         }
-    }).then(() => {
-        res.redirect("/admin/projects");
+    }).then(() => { 
+        req.files.forEach((file) => {
+            projectImages.push(file.filename);
+            SecondaryImages.create({
+                title: file.filename,
+                projectId: id
+            });
+        });
     }).catch(err => {
         res.redirect("/");
     });
+    res.redirect("/admin/projects");
 });
 
 module.exports = router;
