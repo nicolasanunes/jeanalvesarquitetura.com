@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
 
 const uploadImage = multer({
     storage: storage,
-    limits: { fileSize: 1 * 1024 * 1024 },
+    //limits: { fileSize: 1 * 1024 * 1024 },
     fileFilter: (req, file, cb) => {
         if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
             cb(null, true);

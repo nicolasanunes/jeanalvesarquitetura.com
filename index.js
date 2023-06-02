@@ -46,17 +46,25 @@ app.use("/", projectsController);
 app.use("/", usersController);
 app.use("/", architectsController);
 
+// rotas
 app.get('/', (req, res) => {
-    res.render("index");
+    Project.findAll({
+        order: [
+            ['id', 'DESC' ]
+        ],
+        limit: 5
+    }).then(projects => {
+        res.render("index", {projects: projects});
+    });
 });
 
-// rotas
+
 app.get('/about', (req, res) => {
     Architect.findAll({
         order: [
             ['id', 'DESC' ]
         ],
-        limit: 5
+        limit: 3
     }).then(architects => {
         res.render("about", {architects: architects});
     });
@@ -66,12 +74,9 @@ app.get('/projects', (req, res) => {
     Project.findAll({
         order: [
             ['id', 'DESC' ]
-        ],
-        limit: 30
+        ]
     }).then(projects => {
-        Category.findAll().then(categories => {
-            res.render("projects", {projects: projects, categories: categories});
-        });
+        res.render("projects", {projects: projects});
     });
 });
 
@@ -83,9 +88,7 @@ app.get("/:slug", (req, res) => {
         }
     }).then(project => {
         if(project != undefined) {
-            Category.findAll().then(categories => {
-                res.render("project", {project: project, categories: categories});
-            });
+                res.render("project", {project: project});
         } else {
             res.redirect("/");
         }

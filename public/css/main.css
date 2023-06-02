@@ -18,9 +18,9 @@
 
 /* Colors */
 :root {
-  --color-default: #364d59;
-  --color-primary: #feb900;
-  --color-secondary: #52565e;
+  --color-default: #EFEEE9;
+  --color-primary: #5D5D45;
+  --color-secondary: #7D8061;
 }
 
 /* Smooth scroll behavior */
@@ -267,7 +267,7 @@ section {
 
 .header-admin {
   position: static;
-  background-color: #000;
+  background-color: var(--color-primary);
 }
 
 .header .logo img {
@@ -278,13 +278,13 @@ section {
 .header .logo h1 {
   font-size: 24px;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-default);
   margin-bottom: 0;
   font-family: var(--font-primary);
 }
 
 .header .logo h1 span {
-  color: var(--color-primary);
+  color: var(--color-secondary);
 }
 
 /*--------------------------------------------------------------
@@ -321,7 +321,7 @@ section {
     font-family: var(--font-primary);
     font-size: 14px;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--color-default);
     text-transform: uppercase;
     white-space: nowrap;
     transition: 0.3s;
@@ -342,7 +342,7 @@ section {
     height: 2px;
     bottom: -6px;
     left: 0;
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
     visibility: hidden;
     width: 0px;
     transition: all 0.3s ease-in-out 0s;
@@ -1950,7 +1950,7 @@ section {
   transition: 0.5s;
   margin: 10px;
   color: #fff;
-  border: 2px solid var(--color-primary);
+  border: 2px solid var(--color-secondary);
 }
 
 .hero .info .btn-get-started:hover {
@@ -2759,4 +2759,17 @@ section {
   height: 180px;
   margin-left: 20px;
   float: right;
+}
+
+#projects {
+  padding: 24px 0px 0px 0px;
+}
+
+.portfolio-item-padding {
+  padding: 1px;
+  margin: 0;
+}
+
+.btn-get-started-home {
+  color: #7D8061;
 }

@@ -8,8 +8,20 @@
         <div class="card-header">
             <h2><%= project.title %></h2>
         </div>
-            <div class="card-body">
-            <%- project.body %>
+        <div class="card-body">
+            <%- project.description %>
+
+            <% secondaryImage.forEach(secondaryImage => { %>
+                <div class="secondary-image-div" id="images">
+                    <div class="image-preview-div"> 
+                        <div class="menu-close-div">
+                            <span class="image-name"><b>ID: <%= secondaryImage.id %></b></span>
+                        </div>
+                            <img class="image-preview" alt="Preview da Imagem" src="/static/uploads/<%= secondaryImage.title %>" id="<%- secondaryImage.id %>">
+                    </div>
+                    <br>
+                </div>
+            <% }); %>
         </div>
     </div>
 </div>
