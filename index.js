@@ -10,6 +10,7 @@ const usersController = require("./users/UsersController");
 const architectsController = require("./architects/ArchitectsController");
 
 const Project = require("./projects/Project");
+const SecondaryImage = require("./projects/SecondaryImages");
 const User = require("./users/User");
 const Architect = require("./architects/Architect");
 
@@ -62,11 +63,11 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     Architect.findAll({
         order: [
-            ['id', 'DESC' ]
+            ['id', 'ASC' ]
         ],
         limit: 3
-    }).then(architects => {
-        res.render("about", {architects: architects});
+    }).then(architect => {
+        res.render("about", {architect: architect});
     });
 });
 
@@ -87,13 +88,14 @@ app.get("/:slug", (req, res) => {
             slug: slug
         }
     }).then(project => {
-        if(project != undefined) {
-                res.render("project", {project: project});
-        } else {
-            res.redirect("/");
-        }
-    }).catch(err => {
-        res.redirect("/");
+        let id = project.id;
+        SecondaryImage.findAll({
+            where: {
+                projectId: id
+            }
+        }).then(secondaryImage => {
+            res.render("project", {project: project, secondaryImage: secondaryImage});
+        });
     });
 });
 

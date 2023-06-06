@@ -174,7 +174,7 @@ section {
   right: 15px;
   bottom: 15px;
   z-index: 99999;
-  background: var(--color-primary);
+  background: var(--color-secondary);
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -183,12 +183,12 @@ section {
 
 .scroll-top i {
   font-size: 24px;
-  color: var(--color-secondary);
+  color: #fff;
   line-height: 0;
 }
 
 .scroll-top:hover {
-  background: #ffc732;
+  background: var(--color-secondary);
   color: #fff;
 }
 
@@ -1195,11 +1195,21 @@ section {
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
+.about p {
+  color: #000;
+  text-align: justify;
+}
+
+.about span {
+  color: black;
+}
+
 .about h2 {
   font-size: 48px;
   font-weight: 700;
-  font-family: var(--font-secondary);
+  font-family: var(--font-primary);
   margin: 30px 0;
+  color: var(--color-primary);
 }
 
 @media (min-width: 991px) {
@@ -1211,7 +1221,7 @@ section {
 
 .about .our-story {
   padding: 40px;
-  background-color: #f5f6f7;
+  background-color: var(--color-default);
 }
 
 @media (min-width: 991px) {
@@ -1230,7 +1240,7 @@ section {
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 20px;
-  color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 .about .our-story p:last-child {
@@ -1247,6 +1257,7 @@ section {
   padding: 5px 0;
   display: flex;
   align-items: center;
+  margin-left: 39%;
 }
 
 .about ul i {
@@ -2586,16 +2597,15 @@ section {
 --------------------------------------------------------------*/
 .footer {
   color: #fff;
-  background: url("../img/footer-bg.jpg") top center no-repeat;
-  background-size: cover;
+  background-color: var(--color-primary);
   font-size: 14px;
-  padding: 80px 0 60px 0;
+  padding: 0px 0 0px 0;
   position: relative;
 }
 
 .footer:before {
   content: "";
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--color-primary);
   position: absolute;
   inset: 0;
 }
@@ -2628,7 +2638,7 @@ section {
 .footer .footer-content .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-primary);
   color: #fff;
   line-height: 1;
   margin-right: 8px;
@@ -2681,20 +2691,107 @@ section {
 }
 
 .footer .footer-legal .copyright {
-  padding-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 5px 0 6px 0;
+  border-top: 1px solid var(--color-primary);
 }
 
 .footer .footer-legal .credits {
   padding-top: 4px;
   font-size: 13px;
-  color: #fff;
+  color: var(--color-primary)
 }
 
 .footer .footer-legal .credits a {
   color: var(--color-primary);
 }
 
+/**
+  * Portfoil Details
+  */
+
+  .portfolio-details h3 {
+    color: var(--color-primary);
+  }
+
+  .portfolio-details strong {
+    color: var(--color-primary);
+  }
+
+  .portfolio-details h2 {
+    color: var(--color-primary);
+  }
+
+  .portfolio-details p {
+    color: #000;
+    text-align: justify;
+  }
+
+  .portfolio-details ul {
+    color: #000;
+  }
+
+  .portfolio-details {
+    padding-top: 40px;
+  }
+  
+  .portfolio-details .portfolio-details-slider img {
+    width: 100%;
+  }
+  
+  .portfolio-details .portfolio-details-slider .swiper-pagination {
+    margin-top: 20px;
+    position: relative;
+  }
+  
+  .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    opacity: 1;
+    border: 1px solid var(--color-primary);
+  }
+  
+  .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
+    background-color: var(--color-primary);
+  }
+  
+  .portfolio-details .portfolio-info {
+    padding: 30px;
+    background-color: var(--color-default)
+  }
+  
+  .portfolio-details .portfolio-info h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-primary);
+  }
+  
+  .portfolio-details .portfolio-info ul {
+    list-style: none;
+    padding: 0;
+    font-size: 15px;
+  }
+  
+  .portfolio-details .portfolio-info ul li+li {
+    margin-top: 10px;
+  }
+  
+  .portfolio-details .portfolio-description {
+    padding-top: 30px;
+  }
+  
+  .portfolio-details .portfolio-description h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  
+  .portfolio-details .portfolio-description p {
+    padding: 0;
+  }
+  
 /**
   * Editáveis
   */
@@ -2772,4 +2869,16 @@ section {
 
 .btn-get-started-home {
   color: #7D8061;
+}
+
+.projects .portfolio-container {
+  min-height: 89vh;
+}
+
+#about {
+  min-height: 89vh;
+}
+
+#portfolio-details {
+  min-height: 89vh;
 }

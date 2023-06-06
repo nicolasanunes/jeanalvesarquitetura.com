@@ -61,25 +61,8 @@
 <script>
     tinymce.init({
         language: 'pt_BR',
+        forced_root_block : 'p',
         selector: "#description",
     });
 </script>
-
-<!-- Multiple Upload -->
-<!--
-<script>
-    description-form.addEventListener('submit', async function (e) {
-    const files = e.target.secondary-images.files;
-    if (files.length != 0) {
-        for (const single_file of files) {
-            data.append('secondary-images', single_file);
-        }
-    }
-});
-
-const submit_data_fetch = await fetch('/projects/save', {
-    method: 'POST',
-    body: data
-});
--->
 </script>

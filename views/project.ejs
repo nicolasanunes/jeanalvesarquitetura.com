@@ -1,29 +1,54 @@
 <%- include ('partials/header') %>
 <%- include ('partials/navbar') %>
 
-<div class="container">
+  <main id="main">
 
-    <hr>
-    <div class="card">
-        <div class="card-header">
-            <h2><%= project.title %></h2>
-        </div>
-        <div class="card-body">
-            <%- project.description %>
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details" style="background-color: #EFEEE9">
+      <div class="container">
 
-            <% secondaryImage.forEach(secondaryImage => { %>
-                <div class="secondary-image-div" id="images">
-                    <div class="image-preview-div"> 
-                        <div class="menu-close-div">
-                            <span class="image-name"><b>ID: <%= secondaryImage.id %></b></span>
-                        </div>
-                            <img class="image-preview" alt="Preview da Imagem" src="/static/uploads/<%= secondaryImage.title %>" id="<%- secondaryImage.id %>">
-                    </div>
-                    <br>
-                </div>
-            <% }); %>
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                <% secondaryImage.forEach(secondaryImage => { %>
+
+                  <div class="swiper-slide">
+                    <img src="static/uploads/<%= secondaryImage.title %>" alt="">
+                  </div>
+  
+                <% }); %>
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info">
+              <h3>Informações do Projeto</h3>
+              <ul>
+                <li><strong>Título</strong>: <%= project.title %></li>
+                <li><strong>Local</strong>: <%= project.location %></li>
+                <li><strong>Ano</strong>: <%= project.year %></li>
+                <li><strong>Área</strong>: <%= project.area %></li>
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <h2>Descrição</h2>
+              <p>
+                <%= project.description %>
+              </p>
+            </div>
+          </div>
+
         </div>
-    </div>
-</div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
 
 <%- include ('partials/footer') %>

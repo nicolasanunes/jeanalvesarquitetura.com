@@ -155,7 +155,6 @@ router.post("/projects/update", uploadImage.array("project-images", 30), adminAu
                     }
                 });
                     n = n + 1;
-                    console.log("RODOUI O IFFFFFFFFFFFFFFFFFFFF");
             }
         }
     }).then(() => {

@@ -1,20 +1,43 @@
 <%- include ('partials/header') %>
 <%- include ('partials/navbar') %>
 
-<% architects.forEach(architect => { %>
+  <main id="main">
 
-<div class="architect-image" style="border: 1px solid black; width: 400px; height: 600px">
-    <img src="static/uploads/<%= architect.image %>" alt="Foto do Arquiteto" style="width: 400px; height: 600px;" >
-</div>
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about" style="background-color: #EFEEE9">
+      <div class="container" data-aos="fade-up">
 
-<div class="architect-name">
-    <%= architect.name %>
-</div>
+      <% architect.forEach(architect => { %>
 
-<div class="architect-description">
-    <%= architect.description %>
-</div>
+        <div class="row position-relative">
 
-<% }); %>
+          <div class="col-lg-7 about-img" style="background-image: url(static/uploads/<%= architect.image %>)"></div>
 
-<%- include ('partials/footer') %>
+          <div class="col-lg-7">
+            <h2><%= architect.name %></h2>
+            <div class="our-story">
+              <h4>Arquiteto Urbanista</h4>
+              <h3>Sobre mim</h3>
+              <p><%= architect.description %></p>
+              <ul>
+                <li>
+                  <a href="<%= architect.whatsappLink %>" target="_blank"><img src="static/img/favicon/wpp-36x36.png" alt="Favicon do WhatsApp"></a>
+                  <a href="<%= architect.instagramLink %>" target="_blank"><img src="static/img/favicon/ig-36x36.png" alt="Favicon do Instagram"></a>
+                  <a href="<%= architect.facebookLink %>" target="_blank"><img src="static/img/favicon/fb-36x36.png" alt="Favicon do Facebook"></a>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+
+        </div>
+
+        <% }); %>
+
+      </div>
+    </section>
+    <!-- End About Section -->
+
+  </main><!-- End #main -->
+
+  <%- include ('partials/footer') %>
