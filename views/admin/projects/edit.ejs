@@ -1,80 +1,73 @@
-<%- include ('../../partials/header') %>
+<%- include ('../../partials/admin-header') %>
 <%- include ('../../partials/admin-navbar') %>
 
-<div class="container">
-    <br>
-    <form method="POST" action="/projects/update" enctype="multipart/form-data" id="description-form">
-        <input type="hidden" value="<%= project.id %>" name="id">
-        <div class="card">
-            <div class="card-header">
-                <h2>Editar Projeto <%= project.title %></h2>
-            </div>
-            <div class="card-body">
-                <label for="title"><strong>Título:</strong></label>
-                <input class="form-control" type="text" name="title" id="title" value="<%- project.title %>"><br>
-                <label for="location"><strong>Local:</strong></label>
-                <input class="form-control" type="text" name="location" id="location" value="<%- project.location %>"><br>
-                <label for="year"><strong>Ano:</strong></label>
-                <input class="form-control" type="text" name="year" id="year" value="<%- project.year %>"><br>
-                <label for="area"><strong>Área:</strong></label>
-                <input class="form-control" type="text" name="area" id="area" value="<%- project.area %>"><br>
-                
-                <label for="cape-image""><strong>Imagem principal:</strong></label><br>
-                <div class="image-preview-div">
-                    <label for="cape-image">   
-                        <img class="image-preview" alt="Preview da Imagem" src="/static/uploads/<%= project.capeImage %>" id="cape-image-preview">   
-                    </label>
-                </div>
-                <div class="resolutions-div">
-                    <img class="" alt="Resoluções 16:9" src="/static/img/note.png" id="resolutions">
-                </div>
-                <br>
-                <input type="file" accept="image/*" id="cape-image" name="project-images" onchange="document.getElementById('cape-image-preview').src = window.URL.createObjectURL(this.files[0])"><br><br>
-                
-                <label for="cape-image"><strong>Imagens secundárias do projeto:</strong></label><br>
-
-                <% secondaryImage.forEach(secondaryImage => { %>
-                    <div class="secondary-image-div" id="images">
-                        <div class="image-preview-div"> 
-                            <div class="menu-close-div">
-                                <span class="image-name"><b>ID: <%= secondaryImage.id %></b></span>
-                            </div>
-                                <img class="image-preview" alt="Preview da Imagem" src="/static/uploads/<%= secondaryImage.title %>" id="<%- secondaryImage.id %>">
-                        </div>
-                        <br>
-                    </div>
-                <% }); %>
-
-                <br><br>
-                <label for="deletedImagesId"><strong>Digite o ID da(as) imagem(s) a(s) ser(em) excluída(s):</strong></label>
-                <input class="form-control" type="text" name="deletedImagesId" id="deletedImagesId" placeholder="997, 998, 999"">
-
-                <br><br>
-                <label for="cape-image"><strong>Adicionar imagens secundárias:</strong></label><br>
-                <div class="image-preview-div">
-                    <label for="secondary-images">
-                        <img class="image-preview" alt="Preview da Imagem" src="/static/img/image-preview.png" id="secondary-image-preview">   
-                    </label>
-                </div>
-                <br>
-                <input multiple="multiple" type="file" accept="image/*" id="secondary-images" name="project-images" onchange="document.getElementById('secondary-image-preview').src = window.URL.createObjectURL(this.files[0]);"><br>
-                <br>
-                <label for="description"><strong>Descrição:</strong></label>
-                <textarea class="form-control" name="description" id="description" cols="30" rows="10"><%- project.description %></textarea>
-            </div>
-            <input class="btn btn-success" type="submit" value="Atualizar" style="border-radius: 0px 0px 5px 5px;">
-        </div>
+<section id="edit-projects" class="edit-projects">
+    <div class="container">
         <br>
-    </form>
-</div>
+        <form method="POST" action="/projects/update" enctype="multipart/form-data" id="description-form">
+            <input type="hidden" value="<%= project.id %>" name="id">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Editar Projeto <%= project.title %></h2>
+                </div>
+                <div class="card-body">
+                    <label for="title"><strong>Título:</strong></label>
+                    <input class="form-control" type="text" name="title" id="title" value="<%- project.title %>"><br>
+                    <label for="location"><strong>Local:</strong></label>
+                    <input class="form-control" type="text" name="location" id="location" value="<%- project.location %>"><br>
+                    <label for="year"><strong>Ano:</strong></label>
+                    <input class="form-control" type="text" name="year" id="year" value="<%- project.year %>"><br>
+                    <label for="area"><strong>Área:</strong></label>
+                    <input class="form-control" type="text" name="area" id="area" value="<%- project.area %>"><br>
+                    
+                    <label for="cape-image""><strong>Imagem principal:</strong></label><br>
+                    <div class="image-preview-div">
+                        <label for="cape-image">   
+                            <img class="image-preview" alt="Preview da Imagem" src="/static/uploads/<%= project.capeImage %>" id="cape-image-preview">   
+                        </label>
+                    </div>
+                    <div class="resolutions-div">
+                        <img class="" alt="Resoluções 16:9" src="/static/img/note.png" id="resolutions">
+                    </div>
+                    <br>
+                    <input type="file" accept="image/*" id="cape-image" name="project-images" onchange="document.getElementById('cape-image-preview').src = window.URL.createObjectURL(this.files[0])"><br><br>
+                    
+                    <label for="cape-image"><strong>Imagens secundárias do projeto:</strong></label><br>
+
+                    <% secondaryImage.forEach(secondaryImage => { %>
+                        <div class="secondary-image-div" id="images">
+                            <div class="image-preview-div"> 
+                                <div class="menu-close-div">
+                                    <span class="image-name"><b>ID: <%= secondaryImage.id %></b></span>
+                                </div>
+                                    <img class="image-preview" alt="Preview da Imagem" src="/static/uploads/<%= secondaryImage.title %>" id="<%- secondaryImage.id %>">
+                            </div>
+                            <br>
+                        </div>
+                    <% }); %>
+
+                    <br><br>
+                    <label for="deletedImagesId"><strong>Digite o ID da(as) imagem(s) a(s) ser(em) excluída(s):</strong></label>
+                    <input class="form-control" type="text" name="deletedImagesId" id="deletedImagesId" placeholder="997, 998, 999"">
+
+                    <br><br>
+                    <label for="cape-image"><strong>Adicionar imagens secundárias:</strong></label><br>
+                    <div class="image-preview-div">
+                        <label for="secondary-images">
+                            <img class="image-preview" alt="Preview da Imagem" src="/static/img/image-preview.png" id="secondary-image-preview">   
+                        </label>
+                    </div>
+                    <br>
+                    <input multiple="multiple" type="file" accept="image/*" id="secondary-images" name="project-images" onchange="document.getElementById('secondary-image-preview').src = window.URL.createObjectURL(this.files[0]);"><br>
+                    <br>
+                    <label for="description"><strong>Descrição:</strong></label>
+                    <textarea class="form-control" name="description" id="description" cols="30" rows="10"><%- project.description %></textarea>
+                </div>
+                <input class="" type="submit" value="Atualizar" style="border-radius: 0px 0px 5px 5px;">
+            </div>
+            <br>
+        </form>
+    </div>
+</section>
 
 <%- include ('../../partials/admin-footer') %>
-
-<!-- TINYMCE -->
-<script src="/static/tinymce/tinymce.min.js"></script>
-<script>
-    tinymce.init({
-        language: 'pt_BR',
-        selector: "#description",
-    });
-</script>

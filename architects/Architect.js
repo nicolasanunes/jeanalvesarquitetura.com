@@ -2,22 +2,19 @@ const Sequelize = require("sequelize");
 const connection = require("../database/database");
 
 const Architect = connection.define('architects', {
-    name: {
+    image: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }, name: {
         type: Sequelize.STRING,
         allowNull: false
     }, slug: {
         type: Sequelize.STRING,
         allowNull: false
-    }, image: {
-        type: Sequelize.STRING,
-        allowNull: false
-    }, description: {
-        type: Sequelize.STRING,
-        allowNull: false
-    }, address: { 
+    }, role: {
         type: Sequelize.STRING,
         allowNull: true
-    }, phoneNumber: {
+    }, whatsappLink: {
         type: Sequelize.STRING,
         allowNull: true
     }, instagramLink: {
@@ -26,12 +23,9 @@ const Architect = connection.define('architects', {
     }, facebookLink: {
         type: Sequelize.STRING,
         allowNull: true
-    }, twitterLink: {
+    },  description: {
         type: Sequelize.STRING,
-        allowNull: true
-    }, whatsappLink: {
-        type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     }
 });
 

@@ -1,68 +1,59 @@
-<%- include ('../../partials/header') %>
+<%- include ('../../partials/admin-header') %>
 <%- include ('../../partials/admin-navbar') %>
 
-<div class="container">
-    <br>
-    <form method="POST" action="/projects/save" id="description-form" enctype="multipart/form-data">    
-        <div class="card">
-            <div class="card-header">
-                <h2>Cadastrar um Novo Projeto</h2>
-            </div>
-            <div class="card-body">
-                <label for="title"><strong>Título:</strong></label>
-                <input class="form-control" type="text" name="title" id="title" placeholder="Casa Moss"><br>
-                <label for="location"><strong>Local:</strong></label>
-                <input class="form-control" type="text" name="location" id="location" placeholder="Uberlândia/MG"><br>
-                <label for="year"><strong>Ano:</strong></label>
-                <input class="form-control" type="text" name="year" id="year" placeholder="2023"><br>
-                <label for="area"><strong>Área:</strong></label>
-                <input class="form-control" type="text" name="area" id="area" placeholder="240m²"><br>
-                
-                
-               
-                <label for="cape-image"><strong>Imagem principal:</strong></label><br>
-                <div class="image-preview-div">
-                    <label for="cape-image">   
-                        <img class="image-preview" alt="Preview da Imagem" src="/static/img/image-preview.png" id="cape-image-preview">   
-                    </label>
-                </div>
-                <div class="resolutions-div">
-                    <img class="" alt="Resoluções 16:9" src="/static/img/note.png" id="resolutions">
-                </div>
-                <br>
-                <input type="file" accept="image/*" id="cape-image" name="project-images" onchange="document.getElementById('cape-image-preview').src = window.URL.createObjectURL(this.files[0])"><br><br>
-            
-                
-                
-                <label for="cape-image"><strong>Imagens secundárias:</strong></label><br>
-                <div class="image-preview-div">
-                    <label for="secondary-images">
-                        <img class="image-preview" alt="Preview da Imagem" src="/static/img/image-preview.png" id="secondary-image-preview">   
-                    </label>
-                </div>
-                <br>
-                <input multiple="multiple" type="file" accept="image/*" id="secondary-images" name="project-images" onchange="document.getElementById('secondary-image-preview').src = window.URL.createObjectURL(this.files[0]);"><br><br>
-            
-                
-                
-                <label for="description"><strong>Descrição:</strong></label>
-                <textarea class="form-control" name="description" id="description" placeholder="Descrição do projeto" cols="30" rows="10"></textarea>
-            </div>
-            <input class="btn btn-success" type="submit" value="Cadastrar" style="border-radius: 0px 0px 5px 5px;">
-        </div>
+<section id="new-projects" class="new-projects">
+    <div class="container">
         <br>
-    </form>
-</div>
+        <form method="POST" action="/projects/create" id="description-form" enctype="multipart/form-data">    
+            <div class="card">
+                <div class="card-header">
+                    <h2>Cadastrar um Novo Projeto</h2>
+                </div>
+                <div class="card-body">
+                    <label for="title"><strong>Título:</strong></label>
+                    <input class="form-control" type="text" name="title" id="title" placeholder="Casa Moss"><br>
+                    <label for="location"><strong>Local:</strong></label>
+                    <input class="form-control" type="text" name="location" id="location" placeholder="Uberlândia/MG"><br>
+                    <label for="year"><strong>Ano:</strong></label>
+                    <input class="form-control" type="text" name="year" id="year" placeholder="2023"><br>
+                    <label for="area"><strong>Área:</strong></label>
+                    <input class="form-control" type="text" name="area" id="area" placeholder="240m²"><br>
+                    
+                    
+                
+                    <label for="cape-image"><strong>Imagem principal:</strong></label><br>
+                    <div class="image-preview-div">
+                        <label for="cape-image">   
+                            <img class="image-preview" alt="Preview da Imagem" src="/static/img/image-preview.png" id="cape-image-preview">   
+                        </label>
+                    </div>
+                    <div class="resolutions-div">
+                        <img class="" alt="Resoluções 16:9" src="/static/img/note.png" id="resolutions">
+                    </div>
+                    <br>
+                    <input type="file" accept="image/*" id="cape-image" name="project-images" onchange="document.getElementById('cape-image-preview').src = window.URL.createObjectURL(this.files[0])"><br><br>
+                
+                    
+                    
+                    <label for="cape-image"><strong>Imagens secundárias:</strong></label><br>
+                    <div class="image-preview-div">
+                        <label for="secondary-images">
+                            <img class="image-preview" alt="Preview da Imagem" src="/static/img/image-preview.png" id="secondary-image-preview">   
+                        </label>
+                    </div>
+                    <br>
+                    <input multiple="multiple" type="file" accept="image/*" id="secondary-images" name="project-images" onchange="document.getElementById('secondary-image-preview').src = window.URL.createObjectURL(this.files[0]);"><br><br>
+                
+                    
+                    
+                    <label for="description"><strong>Descrição:</strong></label>
+                    <textarea class="form-control" name="description" id="description" placeholder="Descrição..." cols="30" rows="10"></textarea>
+                </div>
+                <input class="" type="submit" value="Cadastrar" style="border-radius: 0px 0px 5px 5px;">
+            </div>
+            <br>
+        </form>
+    </div>
+</section>
 
 <%- include ('../../partials/admin-footer') %>
-
-<!-- TINYMCE -->
-<script src="/static/tinymce/tinymce.min.js"></script>
-<script>
-    tinymce.init({
-        language: 'pt_BR',
-        forced_root_block : 'p',
-        selector: "#description",
-    });
-</script>
-</script>

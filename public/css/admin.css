@@ -1,0 +1,117 @@
+/**
+  * Admin Panel CSS
+  */
+
+/* Fonts */
+:root {
+  --font-default: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-primary: "Roboto", sans-serif;
+  --font-secondary: "Work Sans", sans-serif;
+}
+
+/* Colors */
+:root {
+  --color-default: #EFEEE9;
+  --color-primary: #5D5D45;
+  --color-secondary: #7D8061;
+}
+
+/* Smooth scroll behavior */
+:root {
+  scroll-behavior: smooth;
+}
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+
+/*
+ * Login
+ */
+
+.login {
+  padding: 0;
+}
+
+.login .card-header h3 {
+  color: var(--color-primary);
+  
+}
+
+/*
+ * Projetos
+ */
+
+ .index-projects {
+  padding: 0;
+ }
+
+.index-projects h2 {
+  color: var(--color-primary);
+}
+
+.new-projects {
+  padding: 0;
+}
+
+.new-projects h2 {
+  color: var(--color-primary);
+}
+
+.new-projects label {
+  color: var(--color-primary);
+}
+
+.edit-projects {
+  padding: 0;
+}
+
+.edit-projects h2 {
+  color: var(--color-primary);
+}
+
+.edit-projects label {
+  color: var(--color-primary);
+}
+
+.edit-projects .image-name {
+  color: var(--color-primary);
+  padding-left: 5px;
+}
+
+.edit-projects input {
+  color: #000;
+}
+
+/*
+ * Arquitetos
+ */
+
+.index-architects {
+  padding: 0;
+}
+
+.index-architects h2 {
+  color: var(--color-primary);
+}
+
+.new-architects {
+  padding-top: 0;
+  padding-bottom: 20px;
+}
+
+.new-architects h2 {
+  color: var(--color-primary);
+}
+
+.new-architects label {
+  color: var(--color-primary);
+}
+
+.new-architects input {
+  color: #000;
+}
+
+/*
+ * Usuários
+ */

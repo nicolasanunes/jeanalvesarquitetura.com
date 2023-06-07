@@ -1,19 +1,21 @@
-<%- include ('../../partials/header') %>
+<%- include ('../../partials/admin-header') %>
 
-<div class="container">
-    <hr>
-    <div class="card mt-4">
-        <div class="card-header">
-            Login de Admin
-        </div>
-        <div class="card-body">
-            <form action="/authenticate" method="POST">
-                <input class="form-control" name="email" type="email" placeholder="email@exemplo.com">
-                <input class="form-control" name="password" type="password" placeholder="********"><br>
-                <button type="submit" class="btn-success btn-block">Logar</button>
-            </form>
+<section id="login" class="login">
+    <div class="container">
+        <hr>
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3>Login de Admin</h3>
+            </div>
+            <div class="card-body">
+                <form action="/authenticate" method="POST">
+                    <input class="form-control" name="email" type="email" placeholder="email@exemplo.com">
+                    <input class="form-control" name="password" type="password" placeholder="********"><br>
+                    <button type="submit" class="btn-success btn-block">Logar</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 <%- include ('../../partials/admin-footer') %>

@@ -21,7 +21,7 @@ router.get("/admin/projects/new", adminAuth, (req, res) => {
     res.render("admin/projects/new");
 });
 
-router.post("/projects/save", uploadImage.array("project-images", 30), adminAuth, (req, res) => {
+router.post("/projects/create", uploadImage.array("project-images", 30), adminAuth, (req, res) => {
     let title = req.body.title;
     let location = req.body.location;
     let year = req.body.year;
@@ -167,7 +167,15 @@ router.post("/projects/update", uploadImage.array("project-images", 30), adminAu
         }
     });
     
-    Project.update({title: title, slug: slugify(title), capeImage: capeImage, location: location, year: year, area: area, description: description},{
+    Project.update({
+        title: title, 
+        slug: slugify(title), 
+        capeImage: capeImage, 
+        location: location, 
+        year: year, 
+        area: area, 
+        description: description
+    },{
         where: {
             id: id
         }

@@ -4,11 +4,13 @@
 <section id="new-architects" class="new-architects">
     <div class="container">
         <hr>
-        <form method="POST"  action="/architects/create" enctype="multipart/form-data">
-        
+        <form method="POST"  action="/architects/update" enctype="multipart/form-data">
+            <input type="hidden" value="<%= architect.id %>" name="id">
+            <input type="hidden" value="<%= architect.image %>" name="image">
+            
             <div class="card">
                 <div class="card-header">
-                    <h2>Cadastrar um Novo Arquiteto</h2>
+                    <h2>Editar Arquiteto <%= architect.name %></h2>
                 </div>
                 <div class="card-body">
                     
@@ -16,32 +18,32 @@
                         <label for="image"><strong>Imagem do Arquiteto:</strong></label><br>
                         <div class="image-preview-div">
                             <label for="image">
-                                <img id="file-preview" alt="Preview da Imagem" src="/static/img/image-preview.png" class="image-preview">   
+                                <img id="file-preview" alt="Preview da Imagem" src="/static/uploads/<%= architect.image %>" class="image-preview">   
                             </label>
                         </div>
                     </div>
                     <input type="file" id="image" name="image" onchange="document.getElementById('file-preview').src = window.URL.createObjectURL(this.files[0])"><br><br>
 
                     <label for="name"><strong>Nome:</strong></label>
-                    <input class="form-control" name="name" type="text" placeholder="Jean Vieira Alves"><br>
+                    <input class="form-control" name="name" type="text" value="<%= architect.name %>"><br>
 
                     <label for="role"><strong>Função:</strong></label>
-                    <input class="form-control" name="role" type="text" placeholder="Arquiteto Urbanista"><br>   
+                    <input class="form-control" name="role" type="text" value="<%= architect.role %>"><br>   
 
                     <label for="whatsappLink"><strong>Link do Whatsapp:</strong></label>
-                    <input class="form-control" name="whatsappLink" type="text" placeholder="https://api.whatsapp.com/send?phone=5534?????????"><br>
+                    <input class="form-control" name="whatsappLink" type="text" value="<%= architect.whatsappLink %>"><br>
 
                     <label for="instagramLink"><strong>Link do Instagram:</strong></label>
-                    <input class="form-control" name="instagramLink" type="text" placeholder="https://www.instagram.com/usuario/"><br>
+                    <input class="form-control" name="instagramLink" type="text" value="<%= architect.instagramLink %>"><br>
 
                     <label for="facebookLink"><strong>Link do Facebook:</strong></label>
-                    <input class="form-control" name="facebookLink" type="text" placeholder="https://pt-br.facebook.com/people/usuario"><br>
+                    <input class="form-control" name="facebookLink" type="text" value="<%= architect.facebookLink %>"><br>
 
                     <label for="description"><strong>Descrição:</strong></label>
-                    <textarea class="form-control" name="description" id="description" placeholder="Descrição..." cols="30" rows="10"></textarea>
+                    <textarea class="form-control" name="description" id="description" cols="30" rows="10"><%= architect.description %></textarea>
 
                 </div>
-                <input class="create-btn" type="submit" value="Cadastrar" style="border-radius: 0px 0px 5px 5px;">
+                <input class="create-btn" type="submit" value="Atualizar" style="border-radius: 0px 0px 5px 5px;">
             </div>
         </form>
     </div>
