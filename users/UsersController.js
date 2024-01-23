@@ -118,7 +118,6 @@ router.post("/authenticate", (req, res) => {
     User.findOne({where: {email: email}}).then(user => {
         if(user != undefined) { // se existe um usuário com este e-mail
             let correct = bcrypt.compareSync(password, user.password);
-            console.log(`o correc ta valendo: ${correct}`);
             if(correct) {
                 req.session.user = {
                     id: user.id,
