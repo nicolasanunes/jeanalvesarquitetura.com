@@ -115,3 +115,19 @@
 /*
  * Usuários
  */
+
+ .index-users {
+  padding: 0;
+ }
+
+ .index-users h2 {
+  color: var(--color-primary);
+ }
+
+ .new-users {
+  padding: 0;
+ }
+
+ .new-users h2 {
+  color: var(--color-primary);
+ }

@@ -1,0 +1,3 @@
+Projeto desenvolvido para aprimorar minhas habilidades na criação de um site em Node.js utilizando como Framework o Express.js. Para o front-end foi utilizado um template obtido em https://bootstrapmade.com/ para o front-end, adequado à necessidade do site. O banco de dados utilizado durante o desenvolvimento foi o MySQL.
+
+O projeto trata-se de um site administrável no estilo Portfólio para Arquitetura & Urbanismo onde o arquiteto consegue realizar o upload das imagens de seus projetos, assim como um título e uma breve descrição detalhada do projeto em questão. o site foi planejado de forma que o próprio administrador do site consiga ter gerenciamento das informações expostas, tais como projetos, arquitetos e informações pessoais.

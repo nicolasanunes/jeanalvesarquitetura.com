@@ -1,27 +1,47 @@
-<%- include ('../../partials/header') %>
+<%- include ('../../partials/admin-header') %>
 <%- include ('../../partials/admin-navbar') %>
 
-<div class="container">
-    <hr>
-    <h2>Usuários</h2>
-    <a href="/admin/users/create"> <button class="btn-success">Criar novo usuário</button></a>
-    <hr>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>E-mail</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% users.forEach(user => { %>
+<section class="index-users" id="index-users">
+    <div class="container">
+        <hr>
+        <h2>Usuários</h2>
+        <a href="/admin/users/new"> <button class="btn-success">Criar novo usuário</button></a>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td><%= user.id %></td>
-                    <td><%= user.email %></td>
+                    <th>ID</th>
+                    <th>E-mail</th>
+                    <th>Ações</th>
                 </tr>
-            <% }) %>
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td><%= user.id %></td>
+                        <td><%= user.email %></td>
+                        <td>
+                            <a href="/admin/users/edit/<%= user.id %>"><button class="">Editar</button></a>
+                            <form method="POST" action="/users/delete" style="display: inline" onsubmit="confirmarDelecao(event, this)">
+                                <input type="hidden" name="id" value="<%= user.id %>">
+                                <button class="">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</section>
 
 <%- include ('../../partials/admin-footer') %>
+
+<script>
+    function confirmarDelecao(event, form) {
+        event.preventDefault();
+        let decision = confirm("Vocẽ quer deletar este usuário?");
+        if(decision) {
+            form.submit();
+        }
+    }
+</script>

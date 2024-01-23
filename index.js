@@ -30,7 +30,10 @@ app.use(bodyParser.json());
 
 // sessions
 app.use(session({
-    secret: "klasdksdfdflasdgvbjasdkdjdhfbbf", cookie: { maxAge: 3000000000 }
+    secret: "klasdksdfdflasdgvbjasdkdjdhfbbf",
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 3000000000 },
 }));
 
 // database

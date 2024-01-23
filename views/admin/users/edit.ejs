@@ -1,0 +1,23 @@
+<%- include ('../../partials/admin-header') %>
+<%- include ('../../partials/admin-navbar') %>
+
+<section class="new-users" id="new-users">
+    <div class="container">
+        <hr>
+        <div class="card mt-4">
+            <div class="card-header">
+                <h2>Editar Usuário <%= user.email %></h2>
+            </div>
+            <div class="card-body">
+                <form action="/users/update" method="POST">
+                    <input type="hidden" value="<%= user.id %>" name="id">
+                    <input class="form-control" name="email" type="email" value="<%= user.email %>" readonly>
+                    <input class="form-control" name="password" type="password" placeholder="********"><br>
+                    <button type="submit" class="">Atualizar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include ('../../partials/admin-footer') %>
